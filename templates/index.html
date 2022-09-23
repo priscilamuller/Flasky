@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="..\static\style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title></title>
+  </head>
+
+  <body>
+
+    <!--Navbar-->
+    {% block navbar %}
+    <nav class="navbar bg-transparent">
+      <div class="container-fluid">
+        <div class="col">
+          <a class="navbar-brand fw-bolder text-info text-opacity-50 mx-0" id="name">LCM</a>
+          <a class="navbar-brand fw-bolder text-secondary mx-0 text-opacity-50" id="name">USINAGEM</a>
+        </div>
+        <form class="row g-3" method="POST">
+          {{ form.hidden_tag() }}
+          <div class='col'>
+            {{form.email(class="form-control form-control-sm", 
+                type='email', placeholder="Usuário")}}
+          </div>
+          <div class='col'>
+            {{form.password(class="form-control form-control-sm", 
+              type='password', placeholder="Senha")}} 
+          </div>
+          <div class='col'>        
+            {{form.submit(class="btn btn-sm btn-secondary opacity-75 text-light")}}
+          </div>
+        </form>
+      </div>
+    </nav>
+    {% endblock %}
+
+
+
+
+    {% block content %}
+    {% for message in get_flashed_messages() %}
+    <div class="container my-1">
+      <div class="alert alert-info alert-dismissible fade show     shadow" role="alert">
+        <strong class='text-secondary'>{{message|title}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"       
+        aria-label="Close">
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+
+
+
+    <!--Login-->
+    <div class="container-fluid shadow-sm" id="imgback">
+
+      <div class="row">
+
+        <div class="col-md-6 col-sm-12"  id="login">
+          <h6 class="text-secondary mt-1">
+            <span class="badge bg-secondary">
+              <i class="bi bi-tools"></i>
+            </span>
+            Soluções em Mecanismos Usinados
+          </h6>
+          <strong class="text-light small lh-1 mt-0">
+            A usinagem compreende processos de desgaste da matéria a fim de alcançar uma
+             forma específica, sendo uma alternativa a outros processos de produção. Oferecemos 
+             soluções em usinagem sob demanda para manutenção e reparação de máquinas e 
+             equipamentos industriais, ofertando uma opção com excelente relação custo-benefício
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--Sobre-->
+    <div class="container-fluid my-2" id="content">
+      
+      <div class="row">
+
+        <!--The Three Stooges-->
+        <div class="col-md-6">
+            <img src="static\img\22.png" class="img-fluid w-75 d-block mx-auto" alt="">
+        </div>
+
+        <!--Fale Conosco-->
+        <div class="col-md-6 my-4" id="contato">
+          <div class="card shadow-sm text-bg-primary bg-opacity-10 border-1 border-info border-opacity-10">
+            <div class="card-header">
+              <h6 class="text-secondary"><i class="bi bi-chat"></i> Fale Conosco</h6>
+            </div>
+            <div class="card-body">
+              <form action="/send" method="POST">
+                <div class="mb-2">
+                  <label for="exampleFormControlTextarea1" class="form-label text-secondary small mb-0">Email:</label>
+                  <input type="email" class="form-control form-control-sm" id="fale_conosco_email" name="email" >
+                </div>
+                <div class="mb-2">
+                  <label for="exampleFormControlTextarea1" class="form-label text-secondary small mb-0">
+                    Mensagem:</label>
+                  <textarea class="form-control form-control-sm" id="fale_conosco_mensagem" rows="2" name="mensagem">
+                  </textarea>
+                </div>
+                <div class="d-grid gap-2 mb-2">
+                  <button class="btn btn-secondary btn-sm text-light" type="submit" disabled>
+                    <i class="bi bi-send"></i> Enviar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!--Footer-->
+    <div class="row bg-primary bg-opacity-10 shadow-sm border-1 border-info"id="footer">
+      <div class="text-center small mb-1">
+        <p class="small text-center  text-secondary mb-0 mt-2">
+          Desenvolvido por Priscila Müller Milaneli
+        </p>
+        <a href="https://www.facebook.com/priscila.mullermilaneli" target="blank">
+          <button type="button" class="btn btn-link btn-sm">
+              <i class="bi bi-facebook text-secondary"></i>
+          </button>
+        </a>
+        <a href="https://www.instagram.com/priscillamuller/" target="blank">
+          <button type="button" class="btn btn-link btn-sm">
+              <i class="bi bi-instagram text-secondary"></i>
+          </button>
+        </a>
+        <a href="https://github.com/priscilamuller" target="blank">
+          <button type="button" class="btn btn-link btn-sm">
+              <i class="bi bi-github text-secondary"></i>
+          </button>
+        </a>
+      </div>
+    </div>
+    {% endblock %}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+        
+  </body>
+</html>

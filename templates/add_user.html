@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="..\static\style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<title></title>
+  </head>
+  <body>
+
+
+
+    <!--Navbar-->
+    {% block navbar %}
+    <div class="container-fluid">
+       <nav class="navbar navbar-expand-lg">
+         <div class="container-fluid">
+           <div class="row">
+             <div class="col">
+               <a class="navbar-brand fw-bolder text-info text-opacity-50 mx-0" id="name">LCM</a>
+               <a class="navbar-brand fw-bolder text-secondary mx-0 text-opacity-50" id="name">USINAGEM</a>
+             </div>
+           </div>
+           <button class="navbar-toggler mb-3 justify-content-end border-0 opacity-50" 
+               type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+               aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span> 
+           </button>
+           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+             <ul class="navbar-nav text-secondary opacity-75">
+                <li class="nav-item">
+                 <a class="nav-link "href="#">Cadastrar Novo Usuário</a>
+                </li>
+               <li class="nav-item">
+                 <a class="nav-link" href="/">Sair</a>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+    </div>
+    {% endblock %}
+    
+
+
+    <!--Content-->  
+    {% block content %}
+
+    {% for message in get_flashed_messages() %}
+      <div class="container">
+        <div class="alert alert-success text-secondary alert-dismissible fade show shadow" role="alert">
+          <strong>{{message|title}}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          </button>
+        </div>
+      </div>
+    {% endfor %}
+
+    <div class="container-fluid my-1">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header text-secondary">
+              <h6>Cadastrar Novo Usuário</h6>
+            </div>
+            <div class="card-body">
+              <form method="POST">
+                  {{ form.hidden_tag() }}
+                  {{form.name(class="form-control form-control-sm mb-1" ,placeholder="Nome Completo")}}
+                  {{form.email(class="form-control form-control-sm mb-1" ,placeholder="Email")}}
+                  {{form.password_hash(type="password", class="form-control form-control-sm mb-1" ,placeholder="Senha")}}
+                  {{form.password_hash2(type="password", class="form-control form-control-sm mb-1" ,placeholder="Confirme sua senha")}}
+                  {{form.submit(class="btn btn-sm btn-info opacity-75 text-light bg-secondary")}}
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header text-secondary">
+              <h6>Usuários Cadastrados</h6>
+            </div>
+            <div class="card-body">
+              <table class="table table-hover table-bordered">
+                {% for our_user in our_users %}
+                <tr>
+                  <td class="text-secondary small">
+                    <a 
+                      href="{{url_for('update_user', id=our_user.id)}}">
+                      {{ our_user.name }}
+                    </a>
+                     - {{ our_user.email }} 
+                    <a 
+                      href="{{url_for('delete_user', id=our_user.id)}}">
+                      Excluir
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+  </body>
+</html>
